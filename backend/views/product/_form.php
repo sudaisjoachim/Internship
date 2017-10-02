@@ -2,7 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use yii\helpers\ArrayHelper;
+use app\models\Category;
+use app\models\Shop;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Product */
@@ -18,9 +20,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'product_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::map(\app\models\Category::find()->all(),'category_id','category_name'),['prompt'=>'Select category'])?>
+    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->all(),'category_id','category_name'),['prompt'=>'Select category'])?>
 
-    <?=  $form->field($model,'shop_owner_id')->dropDownList( \yii\helpers\ArrayHelper::map(\app\models\Shop::find()->all(),'shop_owner_id','shop_owner_names'),['prompt'=>'Select product owner'] )?>
+    <?=  $form->field($model,'shop_owner_id')->dropDownList(ArrayHelper::map(Shop::find()->all(),'shop_owner_id','shop_name'),['prompt'=>'Select shop name'] )?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 

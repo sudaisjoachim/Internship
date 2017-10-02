@@ -17,6 +17,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'shop_owner_id') ?>
 
+    <?= $form->field($model, 'shop_name') ?>
+
     <?= $form->field($model, 'shop_number') ?>
 
     <?= $form->field($model, 'shop_owner_names') ?>

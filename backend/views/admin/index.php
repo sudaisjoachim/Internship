@@ -4,40 +4,34 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Products';
+$this->title = 'Admins';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="product-index">
+<div class="admin-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-<!--    // echo $this->render('_search', ['model' => $searchModel]); -->
 
     <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Admin', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'product_id',
-            'product_number',
-            'product_name',
-            'category_id',
-            'shop_owner_id',
-            'description',
-            'price',
-            'product_image',
+            'admin_id',
+            'admin_username',
+            'admin_names',
+            'admin_password',
+            'admin_email:email',
+            //'admin_status',
             //'created_at',
             //'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
 </div>

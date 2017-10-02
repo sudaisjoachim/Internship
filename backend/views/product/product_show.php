@@ -9,6 +9,9 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
+//use app\models\Category;
+//use app\models\Product;
 
 $this->title = 'Products Show';
 //$this->params['breadcrumbs'][] = $this->title;
@@ -17,29 +20,49 @@ $this->title = 'Products Show';
     <div class="product-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
- <?=
 
-     GridView::widget([
-    'dataProvider' => $dataProvider2,
-    'filterModel' => $searchModel2,
-    'columns' => [
-        ['class' => 'yii\grid\SerialColumn'],
+        <?php  Pjax::begin(); ?>
 
-//           'product_id',
-//          'product_number',
-            'product_name',
-            'category_id',
-            'shop_owner_id',
-            'description',
-            'price',
-            'product_image',
-//        //'created_at',
-          //'updated_at',
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider2,
+//            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-        ['class' => 'yii\grid\ActionColumn'],
-    ],
-]);
+        //          'product_id',
+        //          'product_number',
+                    'product_name',
+                [
+                    'class' => 'yii\grid\DataColumn',
+                    'attribute' => 'category Name',
+                    'format' => 'text',
+                    'value' =>function($pro){
+                        return  $pro->getAll2();
+                    },
 
- ?>
+                ],
+                [
+                    'class' => 'yii\grid\DataColumn',
+                    'attribute' => 'Shop name',
+                    'format' => 'text',
+                    'value' =>function($pro){
+                        return  $pro->getAll3();
+                    },
+
+                ],
+                'description',
+                'price',
+                'product_image',
+                //'created_at',
+                //'updated_at',
+
+                ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]); ?>
+
+        <?php Pjax::end(); ?>
 
     </div>
+
+
+   

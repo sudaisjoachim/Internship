@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use yii\data\ActiveDataProvider;
 
 use Yii;
 
@@ -53,4 +54,23 @@ class Category extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+//    public function getCategory_name()
+//    {
+//        $model = category::find()
+//            ->joinWith('product')
+//            ->all();
+//
+//        $query = category::find();
+//        $query->joinWith(['Product']);
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => $query,
+//        ]);
+//        $query->andFilterWhere(['like', 'category_name', $this->category_name])
+//            ->andFilterWhere(['like', 'product.category_id', $this->category_id]);
+//        return $dataProvider;
+//    }
+
+
+
+
 }

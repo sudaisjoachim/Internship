@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "shop".
  *
  * @property int $shop_owner_id
+ * property int shop_name
  * @property int $shop_number
  * @property string $shop_owner_names
  * @property string $shop_address
@@ -34,6 +35,7 @@ class Shop extends \yii\db\ActiveRecord
     {
         return [
             [['shop_number'], 'required'],
+            [['shop_name'], 'string', 'max' => 60],
             [['shop_number'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['shop_owner_names'], 'string', 'max' => 50],
@@ -52,6 +54,7 @@ class Shop extends \yii\db\ActiveRecord
     {
         return [
             'shop_owner_id' => 'Shop Owner ID',
+            'shop_name'=>'Shop name',
             'shop_number' => 'Shop Number',
             'shop_owner_names' => 'Shop Owner Names',
             'shop_address' => 'Shop Address',

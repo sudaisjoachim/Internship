@@ -3,9 +3,11 @@
 namespace app\controllers;
 namespace backend\controllers;
 //use GuzzleHttp\Psr7\UploadedFile;
+use app\models\Category;
 use Yii;
 use app\models\Product;
 use app\models\ProductSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -170,20 +172,34 @@ public $productQuery="";
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionShow(){
+    public function actionShow()
+    {
 
-//$productQuery = Yii::$app->db->createCommand("SELECT product_number from product where product_id =(select MAX(product_id) from product)")->queryAll();
+      //  $searchModel2 = new Product;
 
-        $searchModel2 = new Product;
+//        $dataP = $searchModel2->getAll();
+//
+//        $data = $searchModel2->getCategory_name();
+//
+//        return $this->render('product_show', [
+//
+////            'searchModel2' => $searchModel2,
+//            'dataProvider2' => $dataP,
+////            'data3' => $data,
+//
+//        ]);
 
-        $dataP = $searchModel2->getAll();
+        $dataProvider = new ActiveDataProvider(
+            ['query' => Product::find()]
+        );
 
         return $this->render('product_show', [
-
-            'searchModel2' => $searchModel2,
-            'dataProvider2' => $dataP,
+             //'searchModel' => $searchModel2,
+            'dataProvider2' => $dataProvider,
         ]);
 
-
     }
+
+
+
 }

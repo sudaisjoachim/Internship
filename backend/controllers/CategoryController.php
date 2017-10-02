@@ -121,4 +121,21 @@ class CategoryController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+//    public function actionShow()
+//    {
+//
+//        $searchModel2 = new Category();
+//
+//        $data3 = $searchModel2->getAll2();
+//
+//        return $this->render('product_show', [
+//
+//            'categorynameProvider' => $data3,
+//
+//
+//        ]);
+//
+//    }
+
 }
