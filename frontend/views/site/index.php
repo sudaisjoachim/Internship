@@ -8,7 +8,7 @@ $this->title = 'e-Shopping';
 <div class="site-index">
 
     <div class="jumbotron">
-        <h1>Welcome to XY !</h1>
+        <h1>Welcome to product show customer!</h1>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 

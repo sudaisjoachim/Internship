@@ -6,8 +6,6 @@
  * Time: 11:15 AM
  */
 namespace app\models;
-
-use Yii;
 use yii\db\ActiveRecord;
 
 

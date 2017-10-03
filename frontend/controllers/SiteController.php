@@ -185,13 +185,6 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Resets password.
-     *
-     * @param string $token
-     * @return mixed
-     * @throws BadRequestHttpException
-     */
     public function actionResetPassword($token)
     {
         try {

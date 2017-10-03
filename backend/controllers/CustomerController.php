@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-namespace backend\controllers;
 use Yii;
 use app\models\Customer;
 use app\models\CustomerSearch;

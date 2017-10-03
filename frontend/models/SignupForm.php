@@ -9,13 +9,35 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
+    public $id;
     public $firstname;
     public $lastname;
     public $username;
     public $email;
+    public $ref_shop_id;
+    public $role;
+    public $status;
     public $password;
 
 
+
+
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'USER ID',
+            'firstname' => 'firstname',
+            'lastname' => 'lastname',
+            'username' => 'username',
+            'email' => 'email',
+            'ref_shop_id' => 'Shop ID',
+            'status' => 'status',
+            'role'=>' role',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -27,6 +49,9 @@ class SignupForm extends Model
 
             ['lastname','trim'],
             ['lastname','required'],
+
+            ['role','required'],
+            ['status','required'],
 
             ['username', 'trim'],
             ['username', 'required'],
@@ -56,10 +81,15 @@ class SignupForm extends Model
         }
         
         $user = new User();
+
+        $user->id =$this->id;
         $user->firstname =$this->firstname;
         $user->lastname =$this->lastname;
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->ref_shop_id = $this->ref_shop_id;
+        $user->role = $this->role;
+        $user->status = $this->status;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         

@@ -1,10 +1,8 @@
 <?php
 
 namespace app\models;
-
-use Yii;
 use yii\data\ActiveDataProvider;
-use app\models\Category;
+
 
 /**
  * This is the model class for table "product".

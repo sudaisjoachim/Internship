@@ -1,12 +1,14 @@
 <?php
 
-namespace frontend\models;
+/* @var $this yii\web\View */
+/* @var $form yii\bootstrap\ActiveForm */
+/* @var $model \frontend\models\SignupForm */
+namespace backend\models;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-
-
-
-
+use yii\helpers\ArrayHelper;
+use app\models\Category;
+use app\models\Shop;
 
 $this->title = 'Signup';
 $this->params['breadcrumbs'][] = $this->title;
@@ -30,9 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                  <?= $form->field($model, 'email') ?>
 
-                 <?= $form->field($model,'ref_shop_id')->textInput()?>
+                <?= $form->field($model, 'ref_shop_id')->dropDownList(ArrayHelper::map(Shop::find()->all(),'shop_owner_id','shop_phone'),['prompt'=>'Select shop phone number'])?>
 
-                  <?= $form->field($model, 'role') ?>
+                <?= $form->field($model, 'role')->dropDownList(['admin'=>'Admin','shopuser'=>'Shop user'],['prompt'=>'select role']) ?>
 
                  <?= $form->field($model,'status')->textInput()?>
                 <div class="form-group">

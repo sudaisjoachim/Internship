@@ -1,6 +1,8 @@
 <?php
 
-/* @var $this yii\web\View */
+namespace  backend\models;
+
+
 $this->title = 'My Yii Application';
 
 $options = ['class' => 'btn btn-default'];
