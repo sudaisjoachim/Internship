@@ -14,7 +14,8 @@ use backend\models\PasswordResetRequestForm;
 use backend\models\ResetPasswordForm;
 use backend\models\SignupForm;
 use backend\models\ContactForm;
-
+use common\components\AccessRule;
+use common\models\User;
 
 /**
  * Site controller
@@ -23,6 +24,7 @@ class SiteController extends Controller
 {
     /**
      * @inheritdoc
+
      */
     public function behaviors()
     {
@@ -47,6 +49,7 @@ class SiteController extends Controller
 
             ]
         ];
+
     }
 
     /**
@@ -71,9 +74,16 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-
     public function actionLogin()
     {
+
+//        $this->shop_id = Yii::$app->user->identity;
+//        if ($this->shop_id->ref_shop_id != $model->shop_owner_id) {
+//
+//
+//        }
+
+//        Yii::trace("Is this access guest or not: " . Yii::$app->user->isGuest, 'debug');
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }

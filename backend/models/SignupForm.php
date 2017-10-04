@@ -12,11 +12,12 @@ class SignupForm extends Model
     public $firstname;
     public $lastname;
     public $username;
-    public $password;
     public $email;
-    public $ref_shop_id;
+    public $ref_shop_id = '1';
     public $role;
-    public $status;
+    public $status ;
+    public $password;
+
 
 
 
@@ -34,7 +35,7 @@ class SignupForm extends Model
 
             ['role','required'],
             ['ref_shop_id','required'],
-            ['status','required'],
+
 
             ['username', 'trim'],
             ['username', 'required'],

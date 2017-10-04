@@ -15,8 +15,8 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $ref_shop_id;
-    public $role;
-    public $status;
+    public $role ;
+    public $status ;
     public $password;
 
 
@@ -27,15 +27,13 @@ class SignupForm extends Model
     {
         return [
             'id' => 'USER ID',
-            'firstname' => 'firstname',
-            'lastname' => 'lastname',
-            'username' => 'username',
-            'email' => 'email',
+            'firstname' => 'Firstname',
+            'lastname' => 'Lastname',
+            'username' => 'Username',
+            'email' => 'Email',
             'ref_shop_id' => 'Shop ID',
-            'status' => 'status',
             'role'=>' role',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+
         ];
     }
     /**

@@ -26,7 +26,6 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
-
     /**
      * @inheritdoc
      */
@@ -36,14 +35,14 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
+     *  commented behaviors to be able to save date formart into mysql
+//     */
+//    public function behaviors()
+//    {
+//        return [
+//            TimestampBehavior::className(),
+//        ];
+//    }
 
     /**
      * @inheritdoc

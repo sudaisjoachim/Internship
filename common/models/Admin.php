@@ -34,16 +34,18 @@ class Admin extends ActiveRecord implements IdentityInterface
     {
         return '{{%admin}}';
     }
-
+    /**
+     * commented behaviors to be able to save date formart into mysql
+     */
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            TimestampBehavior::className(),
+//        ];
+//    }
 
     /**
      * @inheritdoc
@@ -114,7 +116,7 @@ class Admin extends ActiveRecord implements IdentityInterface
         }
 
         $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['admin.passwordResetTokenExpire'];
+        $expire = Yii::$app->params['.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
     }
 
@@ -150,6 +152,7 @@ class Admin extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
+        Yii::trace("password value " . Yii::$app->security->validatePassword($password, $this->password_hash), "debug");
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 

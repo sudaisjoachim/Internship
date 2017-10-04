@@ -3,8 +3,8 @@
 namespace frontend\models;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-
-
+use yii\helpers\ArrayHelper;
+use app\models\Shop;
 
 
 
@@ -30,11 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                  <?= $form->field($model, 'email') ?>
 
-                 <?= $form->field($model,'ref_shop_id')->textInput()?>
+                 <?= $form->field($model, 'role')->dropDownList(['webuser'=>'Web user'],['prompt'=>'select role']) ?>
 
-                  <?= $form->field($model, 'role') ?>
-
-                 <?= $form->field($model,'status')->textInput()?>
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
