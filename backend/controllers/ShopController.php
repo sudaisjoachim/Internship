@@ -1,15 +1,14 @@
 <?php
 
-namespace app\controllers;
 namespace backend\controllers;
 
 use Yii;
-use app\models\Shop;
-use app\models\ShopSearch;
+use common\models\ShopSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use common\models\Shop;
 
 /**
  * ShopController implements the CRUD actions for Shop model.

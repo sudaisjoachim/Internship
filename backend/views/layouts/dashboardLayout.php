@@ -7,6 +7,7 @@ use backend\assets\DashboardAsset;
 use yii\helpers\Html;
 use common\widgets\Alert;
 
+
 DashboardAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -15,7 +16,7 @@ DashboardAsset::register($this);
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Admin | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -32,7 +33,7 @@ DashboardAsset::register($this);
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>A</b>LT</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg"><b>Admin</b>Empty Shop</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -57,7 +58,7 @@ DashboardAsset::register($this);
                                 <li><!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                            <img src="../dist/img/user2-160X160.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Support Team
@@ -70,10 +71,10 @@ DashboardAsset::register($this);
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                            <img src="../dist/img/user2-160X160.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
-                                            AdminLTE Design Team
+                                            Empty Shop Design Team
                                             <small><i class="fa fa-clock-o"></i> 2 hours</small>
                                         </h4>
                                         <p>Why not buy a new awesome theme?</p>
@@ -94,7 +95,7 @@ DashboardAsset::register($this);
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                            <img src="../dist/img/user2-160X160.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Sales Department
@@ -243,16 +244,16 @@ DashboardAsset::register($this);
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <img src="../dist/img/user2-160X160.jpg" class="user-image" alt="User Image">
+                        <span class="hidden-xs">Joachim </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="../dist/img/user2-160X160.jpg" class="img-circle" alt="User Image">
 
                             <p>
-                                Alexander Pierce - Web Developer
+                                Joachim - Software Enginneer
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>
@@ -277,7 +278,7 @@ DashboardAsset::register($this);
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href='http://y2aa-backend.dev/site/logout'><img  alt='logout' class="btn btn-default btn-flat"></a>
                             </div>
                         </li>
                     </ul>
@@ -296,10 +297,10 @@ DashboardAsset::register($this);
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="../dist/img/user2-160X160.jpg"  class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>Joachim</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -338,7 +339,7 @@ DashboardAsset::register($this);
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
+                    <li><a href=""><i class="fa fa-circle-o"></i> Top Navigation</a></li>
                     <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
                     <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
                     <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>

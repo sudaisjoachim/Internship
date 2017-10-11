@@ -30,14 +30,14 @@ class m170926_005037_product_table extends Migration
             'updated_at' => $this->timestamp()->notNull()->defaultExpression("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"),
         ], $tableOptions);
 
-//        $this->addForeignKey(
-//            'fk_product_owner_id',
-//            'product', 'shop_owner_id',
-//            'shop','shop_owner_id','CASCADE');
-//        $this->addForeignKey(
-//            'fk_category_id',
-//            'product', 'category_id',
-//            'category','category_id','CASCADE');
+        $this->addForeignKey(
+            'fk_product_owner_id',
+            'product', 'shop_owner_id',
+            'shop','shop_owner_id','CASCADE');
+        $this->addForeignKey(
+            'fk_category_id',
+            'product', 'category_id',
+            'category','category_id','CASCADE');
 
     }
 

@@ -1,18 +1,16 @@
 <?php
 
-namespace app\controllers;
 namespace backend\controllers;
-//use GuzzleHttp\Psr7\UploadedFile;
-use app\models\Category;
 use Yii;
-use app\models\Product;
-use app\models\ProductSearch;
-use yii\data\ActiveDataProvider;
+use common\models\Product;
+use common\models\Shop;
+use common\models\SearchProduct;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\web\UploadedFile;
+use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
 
 
 /**
@@ -20,33 +18,23 @@ use yii\web\UploadedFile;
  */
 class ProductController extends Controller
 {
+
+    private $user_shop_owner_id;
+
     /**
      * @inheritdoc
      */
-public $productQuery="";
-
     public function behaviors()
     {
+
+        $this->user_shop_owner_id = Yii::$app->user->identity;
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['create', 'update','delete'],
-
-                'rules' => [ [
-
-                    'allow' => true,
-                    'roles' => ['@'],
-                ],
-                ],
-
-            ]
         ];
     }
 
@@ -54,24 +42,33 @@ public $productQuery="";
      * Lists all Product models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($accessErrorMsg = null, $isShopOwner_id = false)
     {
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if (Yii::$app->user->isGuest || !$this->user_shop_owner_id->ref_shop_id) {
+            return $this->goHome();
+        }
+        $myShop = $this->user_shop_owner_id->ref_shop_id;
+        $isShopOwner_id = true;
 
-
-        $searchModel2 = new Product;
-
-        $dataP = $searchModel2->getAll();
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-
-            'searchModel2' => $searchModel2,
-            'dataProvider2' => $dataP,
+        $dataProvider = new ActiveDataProvider([
+            'query' => $this->getProductByShop_user_id($myShop),
         ]);
+        return $this->render('index', [
+            'dataProvider' => $dataProvider, 'message' => $accessErrorMsg, 'isShopOwner_id' => $isShopOwner_id
+        ]);
+
+//        $searchModel = new SearchProduct();
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//
+//        return $this->render('index', [
+//            'searchModel' => $searchModel,
+//            'dataProvider' => $dataProvider,
+//        ]);
+//
+
+
+
     }
 
     /**
@@ -93,48 +90,86 @@ public $productQuery="";
      */
     public function actionCreate()
     {
-        $model = new Product();
 
-        //get the instance of the uploaded file
+            $shopModel = null;
 
+        if ($this->user_shop_owner_id->ref_shop_id) {
 
+            $shopModel = Shop::findOne(['shop_owner_id' => $this->user_shop_owner_id->ref_shop_id]);
+        }
+        if (!$shopModel) {
 
+            return $this->actionIndex("Sorry, Access Permission Denied");
+        }
 
+               $model = new Product();
 
+               $path = Yii::getAlias('@backend').'/web/uploads/';
+               $ran=rand(0,10000);
 
             if ($model->load(Yii::$app->request->post())) {
 
-
-                $imagename = $model->product_name;
-                $model->file = UploadedFile::getInstance($model, 'file');
-                $model->file->saveAs('upload/'.$imagename.'.'.$model->file->extension);
-
-                //save the the path in the DB column
-                $model->product_image = 'upload/'.$imagename.'.'.$model->file->extension;
                 $model->save();
+                //save the path in the web folder
+                $model->product_image = UploadedFile::getInstance($model, 'product_image');
+                //Yii::trace(print_r($model->product_image,true));
+
+                if ($model->product_image && $model->validate()) {
+
+                    $model->product_image->saveAs($path . $ran . '_' . 'p' . '.' . $model->product_image->extension);
+
+                    //save the path in the db
+                    $model->product_image = $ran . '_' . 'p' . '.' . $model->product_image->extension;
+
+                    $model->save();
+                }
+
                 return $this->redirect(['view', 'id' => $model->product_id]);
-            }
 
+        }
 
-
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        return $this->render('create', [
+            'model' => $model,
+        ]);
 
 
     }
 
-    /**
-     * Updates an existing Product model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $path = Yii::getAlias('@backend').'/web/uploads/';
+        $ran=rand(0,10000);
+
+        $shopModel = null;
+
+        if ($this->user_shop_owner_id->ref_shop_id) {
+
+            $shopModel = Shop::findOne(['shop_owner_id' => $this->user_shop_owner_id->ref_shop_id]);
+        }
+        if (!$shopModel) {
+
+            return $this->actionIndex("Sorry, Access Permission Denied");
+        }
+
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            //save the path in the web folder
+            $model->product_image = UploadedFile::getInstance($model, 'product_image');
+            //Yii::trace(print_r($model->product_image,true));
+
+            if ($model->product_image && $model->validate()) {
+
+                $model->product_image->saveAs($path . $ran . '_' . 'p' . '.' . $model->product_image->extension);
+
+                //save the path in the db
+                $model->product_image = $ran . '_' . 'p' . '.' . $model->product_image->extension;
+
+                $model->save();
+            }
+
             return $this->redirect(['view', 'id' => $model->product_id]);
         }
 
@@ -172,32 +207,47 @@ public $productQuery="";
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionShow()
-    {
 
-      //  $searchModel2 = new Product;
+    public function getMyshop() {
+        $myShop = ArrayHelper::map(Shop::find()->all(), 'shop_owner_id', 'shop_name');
+        return $myShop;
+    }
 
-//        $dataP = $searchModel2->getAll();
-//
-//        $data = $searchModel2->getCategory_name();
-//
-//        return $this->render('product_show', [
-//
-////            'searchModel2' => $searchModel2,
-//            'dataProvider2' => $dataP,
-////            'data3' => $data,
-//
-//        ]);
 
-        $dataProvider = new ActiveDataProvider(
-            ['query' => Product::find()]
-        );
 
-        return $this->render('product_show', [
-             //'searchModel' => $searchModel2,
-            'dataProvider2' => $dataProvider,
+    // get items list by shop model's id
+    public function actionMyproduct($message = null) {
+
+
+        $isShopOwner_id = false;
+
+        // get shopId from query string
+        $shop_owner_id_query = Yii::$app->request->queryString;
+
+
+        if (!Yii::$app->user->isGuest && $this->user_shop_owner_id->shop_owner_id_query) {
+
+
+            // check whether the shopId of clicked shop and the login user match
+            $isShopOwner_id = ($shop_owner_id_query == $this->user_shop_owner_id->shop_owner_id_query) ? true : false;
+
+        }
+        $dataProvider = new ActiveDataProvider([
+
+
+            'query' => $this->getProductByShop_user_id($shop_owner_id_query),
+
         ]);
+        return $this->render('index', [
+            'dataProvider' => $dataProvider, 'message' => $message, 'isShopOwner_id' => $isShopOwner_id
+        ]);
+    }
 
+
+
+    // get all items in a given shop
+    public function getProductByShop_user_id($shop_owner_id) {
+        return Product::find()->where(['shop_owner_id' => $shop_owner_id]);
     }
 
 

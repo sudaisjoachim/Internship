@@ -1,15 +1,16 @@
 <?php
 
-namespace app\controllers;
 namespace backend\controllers;
 
 use Yii;
-use app\models\Shoppingcart;
-use app\models\ShoppingcartSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use common\models\ShoppingcartSearch;
+use common\models\Shoppingcart;
 use yii\filters\AccessControl;
+
+
 
 
 /**

@@ -15,6 +15,7 @@ LoginAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +24,7 @@ LoginAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="hold-transition login-page">
 <?php $this->beginBody() ?>
 
 <div class="wrap">

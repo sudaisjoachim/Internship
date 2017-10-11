@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b72d7c4b9ca564e7f35a9206867ec026",
+    "content-hash": "880ff286b7d7e5b832af5033519446cc",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -428,6 +428,55 @@
             "time": "2017-06-03T02:28:16+00:00"
         },
         {
+            "name": "kartik-v/bootstrap-popover-x",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/bootstrap-popover-x.git",
+                "reference": "2a809af2cec6c4d4c8b1c7923ec8c491d70707c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/bootstrap-popover-x/zipball/2a809af2cec6c4d4c8b1c7923ec8c491d70707c2",
+                "reference": "2a809af2cec6c4d4c8b1c7923ec8c491d70707c2",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\plugins\\popover\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Bootstrap Popover Extended - Popover with modal behavior, styling enhancements and more.",
+            "homepage": "https://github.com/kartik-v/bootstrap-popover-x",
+            "keywords": [
+                "bootstrap",
+                "extended",
+                "jquery",
+                "modal",
+                "modal-popover",
+                "popover",
+                "popover-x"
+            ],
+            "time": "2017-09-09T18:26:15+00:00"
+        },
+        {
             "name": "kartik-v/php-date-formatter",
             "version": "dev-master",
             "source": {
@@ -529,17 +578,70 @@
             "time": "2017-01-14T11:34:27+00:00"
         },
         {
+            "name": "kartik-v/yii2-editable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-editable.git",
+                "reference": "e07d78660e1d74cf831824855c46742d7ff784da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-editable/zipball/e07d78660e1d74cf831824855c46742d7ff784da",
+                "reference": "e07d78660e1d74cf831824855c46742d7ff784da",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "~1.7",
+                "kartik-v/yii2-popover-x": "~1.3"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\editable\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An enhanced editable widget for Yii 2.0 that allows easy editing of displayed data with numerous configuration possibilities.",
+            "homepage": "https://github.com/kartik-v/yii2-editable",
+            "keywords": [
+                "bootstrap",
+                "editable",
+                "input",
+                "jquery",
+                "popover",
+                "popover-x",
+                "widget"
+            ],
+            "time": "2017-06-28T05:11:45+00:00"
+        },
+        {
             "name": "kartik-v/yii2-krajee-base",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-krajee-base.git",
-                "reference": "bed522a930746e16391e4b207b7b2d82cc0ebab7"
+                "reference": "0cafe6376780cedcd00f52c9d82b172d5851f6b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/bed522a930746e16391e4b207b7b2d82cc0ebab7",
-                "reference": "bed522a930746e16391e4b207b7b2d82cc0ebab7",
+                "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/0cafe6376780cedcd00f52c9d82b172d5851f6b0",
+                "reference": "0cafe6376780cedcd00f52c9d82b172d5851f6b0",
                 "shasum": ""
             },
             "require": {
@@ -577,7 +679,55 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2017-05-04T12:34:30+00:00"
+            "time": "2017-09-29T06:18:14+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-popover-x",
+            "version": "v1.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-popover-x.git",
+                "reference": "58837d63e65caa41f0c13e671d1e2abeec17887d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-popover-x/zipball/58837d63e65caa41f0c13e671d1e2abeec17887d",
+                "reference": "58837d63e65caa41f0c13e671d1e2abeec17887d",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/bootstrap-popover-x": "~1.4",
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\popover\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An extended bootstrap 3.0 popover widget which combines both the bootstrap popover and modal features and includes various new styling enhancements.",
+            "homepage": "https://github.com/kartik-v/yii2-popover-x",
+            "keywords": [
+                "bootstrap",
+                "extended",
+                "jquery",
+                "modal",
+                "modal-popover",
+                "popover",
+                "popover-x"
+            ],
+            "time": "2017-09-08T04:30:42+00:00"
         },
         {
             "name": "phpspec/php-diff",

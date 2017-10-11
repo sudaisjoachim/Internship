@@ -1,8 +1,7 @@
 <?php
 
-namespace backend\models;
-namespace common\models\AdminLoginForm;
 namespace backend\controllers;
+
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -14,8 +13,9 @@ use backend\models\PasswordResetRequestForm;
 use backend\models\ResetPasswordForm;
 use backend\models\SignupForm;
 use backend\models\ContactForm;
-use common\components\AccessRule;
-use common\models\User;
+use common\models\UploadForm;
+use yii\web\UploadedFile;
+
 
 /**
  * Site controller
@@ -44,6 +44,8 @@ class SiteController extends Controller
 
                     'allow' => true,
                     'roles' => ['@'],
+//                    'actions' => ['login','profile'],
+
                 ],
                 ],
 
@@ -64,11 +66,7 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
         return $this->render('index');
@@ -76,26 +74,37 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-
-//        $this->shop_id = Yii::$app->user->identity;
-//        if ($this->shop_id->ref_shop_id != $model->shop_owner_id) {
-//
-//
-//        }
-
-//        Yii::trace("Is this access guest or not: " . Yii::$app->user->isGuest, 'debug');
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+        $this->layout = "loginLayout";
 
         $model = new AdminLoginForm();
+//        Yii::trace("Is this access guest or not: " . Yii::$app->user->isGuest, 'debug');
+//        if (Yii::$app->user->isGuest) {
+//            return $this->render('login', [
+//                'model' => $model,
+//            ]);
+//        }
+
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            Yii::trace("Is this access guest or not: " .Yii::$app->user->identity->role, 'debug');
+
+            if (Yii::$app->user->identity->role == 'admin') {
+//
+                    $this->redirect('../dashboard/index');
+
+                } else {
+
+                    return $this->goBack();
+                }
+
         } else {
             return $this->render('login', [
                 'model' => $model,
             ]);
+
+
         }
+
     }
     /**
      * Logs out the current admin
@@ -204,6 +213,25 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+//    public function actionUpload()
+//    {
+//        $upload = new UploadForm();
+//
+//        if (Yii::$app->request->isPost)
+//        {
+//            $upload->product_image = UploadedFile::getInstance($upload, 'product_image');
+//
+//            if ($upload->upload()) {
+//
+//
+//                // file is uploaded successfully
+//                return $this->render('test');
+//            }
+//        }
+//
+//        return $this->render('upload', ['model' => $upload]);
+//    }
 
 
 }

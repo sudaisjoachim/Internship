@@ -1,14 +1,12 @@
 <?php
 
 namespace backend\controllers;
-use yii\web\Controller;
-use app\models\Country;
 use yii;
 
 
 class CountryController extends \yii\web\Controller
 {
-    public function actionMycountries()
+    public function actionIndex()
     {
 
 

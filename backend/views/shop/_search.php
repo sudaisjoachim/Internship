@@ -1,11 +1,10 @@
 <?php
-
+namespace common\models;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\ShopSearch */
-/* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="shop-search">

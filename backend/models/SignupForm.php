@@ -13,7 +13,7 @@ class SignupForm extends Model
     public $lastname;
     public $username;
     public $email;
-    public $ref_shop_id = '1';
+    public $ref_shop_id;
     public $role;
     public $status ;
     public $password;

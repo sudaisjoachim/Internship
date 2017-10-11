@@ -1,6 +1,5 @@
 <?php
 namespace frontend\controllers;
-
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -12,6 +11,8 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use app;
+
 
 /**
  * Site controller
@@ -23,30 +24,31 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
+
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
+        'access' => [
+            'class' => AccessControl::className(),
+            'rules' => [
+                [
+                    'actions' => ['login', 'error', 'index'],
+                    'allow' => true,
+                ],
+                [
+                    'actions' => ['logout', 'index'],
+                    'allow' => true,
+                    'roles' => ['@'],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
+        ],
+        'verbs' => [
+            'class' => VerbFilter::className(),
+            'actions' => [
+                'logout' => ['post'],
             ],
-        ];
+        ],
+    ];
+
+
     }
 
     /**
@@ -72,6 +74,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = "IndexLayout";
+
         return $this->render('index');
     }
 
@@ -82,10 +86,14 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+
+        $this->layout = "loginLayout";
+
+        // Yii::trace("Is this access guest or not: " .Yii::$app->user->isGuest, 'debug');
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();

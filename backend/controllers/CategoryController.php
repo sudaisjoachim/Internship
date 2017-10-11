@@ -1,10 +1,9 @@
 <?php
 
-namespace app\controllers;
 namespace backend\controllers;
 use Yii;
-use app\models\Category;
-use app\models\CategorySearch;
+use common\models\Category;
+use common\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -106,13 +105,6 @@ class CategoryController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Category model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Category the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = Category::findOne($id)) !== null) {
@@ -122,20 +114,5 @@ class CategoryController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-//    public function actionShow()
-//    {
-//
-//        $searchModel2 = new Category();
-//
-//        $data3 = $searchModel2->getAll2();
-//
-//        return $this->render('product_show', [
-//
-//            'categorynameProvider' => $data3,
-//
-//
-//        ]);
-//
-//    }
 
 }

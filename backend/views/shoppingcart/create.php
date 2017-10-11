@@ -3,8 +3,6 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
-/* @var $model app\models\Shoppingcart */
 
 $this->title = 'Create Shoppingcart';
 $this->params['breadcrumbs'][] = ['label' => 'Shoppingcarts', 'url' => ['index']];
