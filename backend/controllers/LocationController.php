@@ -3,17 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\ShopSearch;
+use common\models\Location;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\Shop;
+use  yii\web\JsonParser;
+
 
 /**
- * ShopController implements the CRUD actions for Shop model.
+ * LocationController implements the CRUD actions for Location model.
  */
-class ShopController extends Controller
+class LocationController extends Controller
 {
     /**
      * @inheritdoc
@@ -26,30 +27,17 @@ class ShopController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
-
             ],
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['create', 'update','delete'],
-
-                'rules' => [ [
-
-                    'allow' => true,
-                    'roles' => ['@'],
-                ],
-                ],
-
-            ]
         ];
     }
 
     /**
-     * Lists all Shop models.
+     * Lists all Location models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ShopSearch();
+        $searchModel = new LocationSearchController();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -59,7 +47,7 @@ class ShopController extends Controller
     }
 
     /**
-     * Displays a single Shop model.
+     * Displays a single Location model.
      * @param integer $id
      * @return mixed
      */
@@ -71,16 +59,16 @@ class ShopController extends Controller
     }
 
     /**
-     * Creates a new Shop model.
+     * Creates a new Location model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Shop();
+        $model = new Location();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->shop_owner_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -89,7 +77,7 @@ class ShopController extends Controller
     }
 
     /**
-     * Updates an existing Shop model.
+     * Updates an existing Location model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -99,7 +87,7 @@ class ShopController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->shop_owner_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -108,7 +96,7 @@ class ShopController extends Controller
     }
 
     /**
-     * Deletes an existing Shop model.
+     * Deletes an existing Location model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -121,19 +109,26 @@ class ShopController extends Controller
     }
 
     /**
-     * Finds the Shop model based on its primary key value.
+     * Finds the Location model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Shop the loaded model
+     * @return Location the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Shop::findOne($id)) !== null) {
+        if (($model = Location::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
+
+    public function actionGetCityProvince($zipId){
+
+        $location = Location::findOne($zipId);
+        echo Json::encode($location);
+
+    }
 }

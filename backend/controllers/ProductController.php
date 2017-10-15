@@ -1,6 +1,7 @@
 <?php
 
 namespace backend\controllers;
+use common\models\AdminLoginForm;
 use Yii;
 use common\models\Product;
 use common\models\Shop;
@@ -20,6 +21,8 @@ class ProductController extends Controller
 {
 
     private $user_shop_owner_id;
+
+
 
     /**
      * @inheritdoc
@@ -45,11 +48,15 @@ class ProductController extends Controller
     public function actionIndex($accessErrorMsg = null, $isShopOwner_id = false)
     {
 
+
+
         if (Yii::$app->user->isGuest || !$this->user_shop_owner_id->ref_shop_id) {
             return $this->goHome();
         }
+
         $myShop = $this->user_shop_owner_id->ref_shop_id;
         $isShopOwner_id = true;
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $this->getProductByShop_user_id($myShop),
@@ -57,17 +64,6 @@ class ProductController extends Controller
         return $this->render('index', [
             'dataProvider' => $dataProvider, 'message' => $accessErrorMsg, 'isShopOwner_id' => $isShopOwner_id
         ]);
-
-//        $searchModel = new SearchProduct();
-//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-//
-//        return $this->render('index', [
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
-//        ]);
-//
-
-
 
     }
 
@@ -103,23 +99,24 @@ class ProductController extends Controller
         }
 
                $model = new Product();
-
                $path = Yii::getAlias('@backend').'/web/uploads/';
-               $ran=rand(0,10000);
+//               $ran=rand(0,10000);
 
             if ($model->load(Yii::$app->request->post())) {
 
-                $model->save();
+
                 //save the path in the web folder
                 $model->product_image = UploadedFile::getInstance($model, 'product_image');
                 //Yii::trace(print_r($model->product_image,true));
 
                 if ($model->product_image && $model->validate()) {
 
-                    $model->product_image->saveAs($path . $ran . '_' . 'p' . '.' . $model->product_image->extension);
+                    $model->save();
+
+                    $model->product_image->saveAs($path . $model->product_id. '_' . 'p' . '.' . $model->product_image->extension);
 
                     //save the path in the db
-                    $model->product_image = $ran . '_' . 'p' . '.' . $model->product_image->extension;
+                    $model->product_image =  $model->product_id . '_' . 'p' . '.' . $model->product_image->extension;
 
                     $model->save();
                 }
@@ -140,7 +137,7 @@ class ProductController extends Controller
         $model = $this->findModel($id);
 
         $path = Yii::getAlias('@backend').'/web/uploads/';
-        $ran=rand(0,10000);
+//        $ran=rand(0,10000);
 
         $shopModel = null;
 
@@ -161,11 +158,12 @@ class ProductController extends Controller
             //Yii::trace(print_r($model->product_image,true));
 
             if ($model->product_image && $model->validate()) {
+                $model->save();
 
-                $model->product_image->saveAs($path . $ran . '_' . 'p' . '.' . $model->product_image->extension);
+                $model->product_image->saveAs($path . $model->product_id . '_' . 'p' . '.' . $model->product_image->extension);
 
                 //save the path in the db
-                $model->product_image = $ran . '_' . 'p' . '.' . $model->product_image->extension;
+                $model->product_image = $model->product_id . '_' . 'p' . '.' . $model->product_image->extension;
 
                 $model->save();
             }
@@ -208,10 +206,11 @@ class ProductController extends Controller
     }
 
 
-    public function getMyshop() {
-        $myShop = ArrayHelper::map(Shop::find()->all(), 'shop_owner_id', 'shop_name');
-        return $myShop;
-    }
+
+//    public function getMyshop() {
+//        $myShop = ArrayHelper::map(Shop::find()->all(), 'shop_owner_id', 'shop_name');
+//        return $myShop;
+//    }
 
 
 
@@ -247,7 +246,47 @@ class ProductController extends Controller
 
     // get all items in a given shop
     public function getProductByShop_user_id($shop_owner_id) {
+
         return Product::find()->where(['shop_owner_id' => $shop_owner_id]);
+    }
+
+
+    /*
+     * path to upload product images
+     */
+    public function actionImage($filename)
+    {
+
+        $filepath = Yii::getAlias("@backend") . DIRECTORY_SEPARATOR . "web/uploads" . DIRECTORY_SEPARATOR . $filename;
+
+        if(!file_exists($filepath)){
+
+            $filepath = Yii::getAlias("@backend").DIRECTORY_SEPARATOR."web/uploads".DIRECTORY_SEPARATOR."error.jpg";
+
+        }
+
+        return Yii::$app->response->sendFile($filepath);
+
+    }
+
+
+    /*
+     *  view for admin request
+     */
+    public function actionShow()
+    {
+
+        $stringQuery =  Yii::$app->request->queryString;
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $this->getProductByShop_user_id($stringQuery),
+        ]);
+
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider
+        ]);
+
     }
 
 

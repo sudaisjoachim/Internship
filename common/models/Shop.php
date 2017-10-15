@@ -1,5 +1,6 @@
 <?php
 namespace  common\models;
+use yii;
 
 class Shop extends \yii\db\ActiveRecord
 {
@@ -53,4 +54,6 @@ class Shop extends \yii\db\ActiveRecord
         return Shop::find()->select(['shop_name', 'shop_owner_id'])->asArray()->all();
 
     }
+
+
 }

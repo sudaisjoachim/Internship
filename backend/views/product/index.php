@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use common\models\Product;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\SearchProduct */
@@ -34,15 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'shop_owner_id',
             'description',
             'price',
-//             [
-//                 'attribute'=>'product_image',
-//                 'value'=> Yii::getAlias('@backend').'/web/uploads/',
-//                 'format'=>['image',['width'=>'100','height'=>'100']],
-//
-//
-//             ],
-
-           'product_image',
+              [
+                'attribute'=>'product_image',
+                'format'=>'raw',
+                'value'=> function(common\models\product $name) {
+                        //by colling function image under product model
+                        // return '<img src=" image?filename='.$name->product_image.'" width="80px" height="50px">';
+                 return '<img src="' . Yii::$app->request->baseUrl . '/uploads/'.$name->product_image.'" width="120px" height="60"/>';
+                }
+              ],
             //'created_at',
             //'updated_at',
 
